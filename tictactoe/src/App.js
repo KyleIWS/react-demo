@@ -15,7 +15,8 @@ class App extends Component {
     return (
       <div>
         <TitleComponent name="Husky-Cougar-Toe"/>
-        <Board />
+        <Board col={3} row={3} />
+        {/*<UltimateBoard />*/}
       </div>
     );
   }
@@ -52,15 +53,15 @@ class Board extends Component {
 
   render() {
     var tiles = [];
-    for(var i = 0; i < 9; i++) {
+    for(var i = 0; i < this.state.props.row * this.state.props.col; i++) {
       tiles.push(<Tile />);
     }
 
     return (
       <div className="board"
       style={ {
-        width: 300 + 50,
-        height: 300 + 50
+        width: this.state.props.col * 100 + this.state.props.col * 15,
+        height: this.state.props.row * 100 + this.state.props.row * 16
       } }>
         {tiles}
       </div>
@@ -107,6 +108,27 @@ class Tile extends Component {
       <div className={this.state.shape + " " + this.state.animal} 
       onMouseDown={this.handleClick}
       style={{backgroundImage: "url(\"" + (this.state.animal == "husky" ? husky : cougar) + "\")"}}></div>
+    );
+  }
+}
+
+
+// Renders a game of super TicTacToe
+class UltimateBoard extends Component {
+  constructor() {
+    super();
+  }
+
+  
+  render() {
+    var boards = [];
+    for(var i = 0; i < 9; i++) {
+      boards.push(<Board row={3} col={3} />);
+    }
+    return (
+      <div className="ultimate">
+        {boards}
+      </div>
     );
   }
 }

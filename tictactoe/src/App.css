@@ -12,9 +12,16 @@ h1 {
     /*width: 350px;
     height: 350px;*/
     border: 2px solid black;
-    margin: auto;
     overflow: hidden;
     text-align: center;
+    /*display: inline-block;*/
+    margin: auto;
+    margin-top: -5px;
+}
+
+.ultimate {
+  width: 1200px;
+  text-align: center;
 }
 
 .tile {
