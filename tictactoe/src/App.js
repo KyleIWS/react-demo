@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import husky from './husky.png';
-import cougar from './cougar.png';
+import husky from './husky.png';  // Image resources need to be imported at the beginning.
+import cougar from './cougar.png'; // Now cougar/husky are variables representing urls.
 import './App.css';
 
-
+// Need to disable right click menu
 window.oncontextmenu = function() {
   return false;
 }
 
+// Main app component. We can think of it as "main".
 class App extends Component {
   render() {
     return (
       <div>
         <TitleComponent name="Husky-Cougar-Toe"/>
         <Board />
-        <Tile />
       </div>
     );
   }
 }
 
+// Very simple component, just displaying an h1
+// with the given attribute.
 class TitleComponent extends Component {
   constructor(props) {
     super(props);
@@ -37,18 +39,42 @@ class TitleComponent extends Component {
   }
 }
 
+// Slightly more interesting. A board element is a div,
+// with styles are are familiar with but now we set them in
+// the render stage. Add a bunch of Tile tags woth a loop.
 class Board extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      props: this.props
+    }
   }
 
   render() {
+    var tiles = [];
+    for(var i = 0; i < 9; i++) {
+      tiles.push(<Tile />);
+    }
+
     return (
-      <div className="board"></div>
+      <div className="board"
+      style={ {
+        width: 300 + 50,
+        height: 300 + 50
+      } }>
+        {tiles}
+      </div>
     );
   }
 }
 
+
+// Down here is the most complex example yet.
+// A single tile knows its classes as a form of state.
+// We have function called handleClick (that takes in a parameter,
+// and we bind it in the constructor). Now when we render a tile,
+// each one knows to change their state on click and that will trigger
+// a re-render.
 class Tile extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +87,8 @@ class Tile extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // Simmilar to onClick on the OOP example, but now we update
+  // state and not the style directly.
   handleClick(e) {
     if(e.button == 0) {
       this.setState({animal: "husky"});
@@ -72,6 +100,8 @@ class Tile extends Component {
     
   }
 
+  // Render uses reacts method for updating style (passing in an JSON object)
+  // As well we can atttach an onMouseDown handler.
   render() {
     return (
       <div className={this.state.shape + " " + this.state.animal} 
