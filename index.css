@@ -9,8 +9,31 @@ h1 {
 }
 
 #board {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     border: 2px solid black;
     margin: auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    position: relative;
+    display: inline-block;
+    margin: 4px;
+}
+
+.husky {
+    background-color: gold;
+    background-image: url("imgs/husky.png");
+    background-size: 100px 100px;
+}
+
+.coug {
+    background-color: darkred;
+    background-image: url("imgs/couger.png");
+    background-size: 100px 100px;
 }
