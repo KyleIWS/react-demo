@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import husky from './husky.png';
+import cougar from './cougar.png';
+import './App.css';
 
 
 window.oncontextmenu = function() {
@@ -68,15 +69,16 @@ class Tile extends Component {
     } else if(e.button == 1) {
       this.setState({animal: ""});
     }
+    
   }
 
   render() {
     return (
       <div className={this.state.shape + " " + this.state.animal} 
       onMouseDown={this.handleClick}
-      ></div>
+      style={{backgroundImage: "url(\"" + (this.state.animal == "husky" ? husky : cougar) + "\")"}}></div>
     );
   }
 }
-//style={ {backgroundImage: "url(/imgs/" + this.state.animal + ".png" } }
+
 export default App;
