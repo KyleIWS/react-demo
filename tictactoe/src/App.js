@@ -46,23 +46,44 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      props: this.props
+      props: this.props,
+      gridState : {
+        topLeft : 0, top : 1, topRight : 2,
+        midLeft : 3, mid : 4, midRight : 5,
+        botLeft : 6, bot : 7, botRight : 8
+      },
+      gridLook : {
+        getLeft : function(myPos) {if(myPos % 3 == 0) { return -1 } else { return myPos - 1 } },
+        getRight : function(myPos) {if( (myPos + 1) % 3 == 0) { return -1 } else { return myPos + 1 } },
+        getTop : function(myPos) {if(myPos < 3) { return -1 } else { return myPos - 3 } },
+        getBottom : function(myPos) {if(myPos > 5) { return -1 } else { return myPos + 3 } }
+      }
     }
   }
 
-  render() {
+  componentWillMount() {
     var tiles = [];
     for(var i = 0; i < 9; i++) {
-      tiles.push(<Tile />);
+      tiles.push(<Tile key={i}/>);
     }
+    this.setState({tiles : tiles });
+  }
 
+  winner() {
+    if
+  }
+
+  render() {
+    if(this.winner()) {
+      
+    }
     return (
       <div className="board"
       style={ {
         width: 300 + 50,
         height: 300 + 50
       } }>
-        {tiles}
+        {this.state.tiles}
       </div>
     );
   }
