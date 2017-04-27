@@ -22,8 +22,11 @@ for(var col = 0; col < 3; col++) {
         tile.left = (col * 100) + "px";
         tile.top = (row * 100) + "px";
 
-        tile.onmousedown = choose;      
-        
+        tile.onmousedown = function(e) {
+            choose(e);
+            checkVictory();
+        }      
+
         board.appendChild(tile);
 
     }
@@ -42,4 +45,19 @@ function choose(event) {
         event.target.classList.remove("husky");
         event.target.classList.remove("coug");
     }
+}
+
+function checkVictory() {
+    var allTiles = document.querySelectorAll(".tile");
+    var state = "";
+    for(var curTile = 0; curTile < allTiles.length; curTile++) {
+        if(allTiles[curTile].classList.contains("husky")) {
+            state += "H";
+        } else if(allTiles[curTile].classList.contains("coug")) {
+            state += "C";
+        } else {
+            state += "#";
+        }
+    }
+    console.log(state);
 }
